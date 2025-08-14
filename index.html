@@ -321,23 +321,23 @@
         const costRanges = {
             websiteTypes: {
                 onepage: [500, 2000],
-                small: [2000, 8000],
-                ecommerce: [5000, 25000],
+                small: [2000, 10000],
+                ecommerce: [5000, 50000],
                 enterprise: [20000, 100000]
             },
             designTypes: {
                 template: [0, 0],
                 semicustom: [500, 3000],
-                custom: [2000, 15000]
+                custom: [2000, 20000]
             },
             features: {
                 contact: [0, 500],
                 blog: [500, 1500],
                 booking: [1000, 3000],
-                payment: [3000, 10000],
+                payment: [3000, 15000],
                 login: [5000, 20000],
                 multilingual: [1000, 5000],
-                api: [3000, 15000],
+                api: [3000, 20000],
                 animations: [1000, 8000]
             },
             builders: {
@@ -348,8 +348,8 @@
                 'large-agency': 2.0
             },
             ongoing: {
-                hosting: [50, 500],
-                maintenance: [500, 5000],
+                hosting: [50, 1000],
+                maintenance: [500, 60000],
                 seo: [6000, 120000] // $500-10k per month
             }
         };
@@ -380,7 +380,7 @@
 
             // Pages cost (beyond 5 pages)
             const extraPages = Math.max(0, pages - 5);
-            const pagesCost = [extraPages * 200, extraPages * 400];
+            const pagesCost = [extraPages * 200, extraPages * 500];
 
             // Subtotal before multiplier
             const subtotal = [
