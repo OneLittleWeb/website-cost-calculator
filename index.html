@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Cost Calculator 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #E6E0FF 0%, #ffffff 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .calculator {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(30, 24, 255, 0.1);
+            max-width: 900px;
+            width: 100%;
+            max-height: 95vh;
+            overflow-y: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .form-section {
+            padding: 40px;
+            border-right: 1px solid #E6E0FF;
+        }
+
+        .results-section {
+            padding: 40px;
+            background: #1E18FF;
+            color: white;
+            border-radius: 0 16px 16px 0;
+        }
+
+        h1 {
+            color: #1E18FF;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        select, input[type="range"], input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #E6E0FF;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #1E18FF;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            font-weight: 400;
+            font-size: 13px;
+        }
+
+        .range-display {
+            text-align: center;
+            font-weight: 600;
+            color: #1E18FF;
+            margin-top: 5px;
+        }
+
+        .results h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #FF9243;
+        }
+
+        .cost-display {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .cost-range {
+            font-size: 28px;
+            font-weight: 700;
+            color: #FF9243;
+            margin-bottom: 5px;
+        }
+
+        .cost-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .breakdown {
+            margin-top: 20px;
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 13px;
+        }
+
+        .summary {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 146, 67, 0.1);
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .calculator {
+                grid-template-columns: 1fr;
+                max-height: none;
+            }
+            
+            .form-section {
+                border-right: none;
+                border-bottom: 1px solid #E6E0FF;
+            }
+            
+            .results-section {
+                border-radius: 0 0 16px 16px;
+            }
+            
+            .form-section, .results-section {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="form-section">
+            <h1>OLW Website Cost Calculator</h1>
+            
+            <div class="form-group">
+                <label for="websiteType">Website Type</label>
+                <select id="websiteType">
+                    <option value="onepage">One-page / Informational</option>
+                    <option value="small" selected>Small Business (5-10 pages)</option>
+                    <option value="ecommerce">E-commerce</option>
+                    <option value="enterprise">Custom / Enterprise</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="designType">Design Preference</label>
+                <select id="designType">
+                    <option value="template">Use ready-made templates</option>
+                    <option value="semicustom" selected>Minor customizations</option>
+                    <option value="custom">Fully custom UX/UI</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Functionality Needed</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="contact" checked>
+                        <label for="contact">Contact form</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="blog">
+                        <label for="blog">Blog</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="booking">
+                        <label for="booking">Booking system</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="payment">
+                        <label for="payment">Payment gateway</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="login">
+                        <label for="login">User login/dashboard</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="multilingual">
+                        <label for="multilingual">Multilingual</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="api">
+                        <label for="api">API integrations</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="animations">
+                        <label for="animations">Advanced animations</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="pages">Total Number of Pages</label>
+                <input type="range" id="pages" min="1" max="50" value="8">
+                <div class="range-display" id="pagesDisplay">8 pages</div>
+            </div>
+
+            <div class="form-group">
+                <label for="builder">Who Will Build It?</label>
+                <select id="builder">
+                    <option value="diy">I'll do it myself (DIY)</option>
+                    <option value="freelancer-offshore">Freelancer (Offshore)</option>
+                    <option value="freelancer-local" selected>Freelancer (US/EU)</option>
+                    <option value="small-agency">Small agency</option>
+                    <option value="large-agency">Large agency</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Ongoing Services Needed</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="hosting" checked>
+                        <label for="hosting">Hosting</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="maintenance" checked>
+                        <label for="maintenance">Maintenance</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="seo">
+                        <label for="seo">SEO & marketing</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="results-section">
+            <h2>Cost Estimate</h2>
+            
+            <div class="cost-display">
+                <div class="cost-range" id="buildCost">$4,500 - $11,700</div>
+                <div class="cost-label">Initial Build Cost</div>
+            </div>
+
+            <div class="cost-display">
+                <div class="cost-range" id="annualCost">$1,060 - $6,025</div>
+                <div class="cost-label">Annual Ongoing Costs</div>
+            </div>
+
+            <div class="breakdown">
+                <div class="breakdown-item">
+                    <span>Base Website:</span>
+                    <span id="baseCost">$2,000 - $8,000</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>Design:</span>
+                    <span id="designCost">$500 - $3,000</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>Features:</span>
+                    <span id="featuresCost">$0 - $500</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>Extra Pages:</span>
+                    <span id="pagesCost">$600 - $1,200</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>Team Multiplier:</span>
+                    <span id="multiplier">1.0x</span>
+                </div>
+            </div>
+
+            <div class="summary" id="summary">
+                Based on your selections (Small Business website with 8 pages, contact form, and minor customizations built by a local freelancer), you're likely to spend between $4,500 and $11,700 for initial development. Expect to budget around $1,060 to $6,025 per year for hosting and maintenance.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cost calculation logic
+        const costRanges = {
+            websiteTypes: {
+                onepage: [500, 2000],
+                small: [2000, 8000],
+                ecommerce: [5000, 25000],
+                enterprise: [20000, 100000]
+            },
+            designTypes: {
+                template: [0, 0],
+                semicustom: [500, 3000],
+                custom: [2000, 15000]
+            },
+            features: {
+                contact: [0, 500],
+                blog: [500, 1500],
+                booking: [1000, 3000],
+                payment: [3000, 10000],
+                login: [5000, 20000],
+                multilingual: [1000, 5000],
+                api: [3000, 15000],
+                animations: [1000, 8000]
+            },
+            builders: {
+                diy: 0.2,
+                'freelancer-offshore': 0.6,
+                'freelancer-local': 1.0,
+                'small-agency': 1.3,
+                'large-agency': 2.0
+            },
+            ongoing: {
+                hosting: [50, 500],
+                maintenance: [500, 5000],
+                seo: [6000, 120000] // $500-10k per month
+            }
+        };
+
+        function calculateCosts() {
+            const websiteType = document.getElementById('websiteType').value;
+            const designType = document.getElementById('designType').value;
+            const pages = parseInt(document.getElementById('pages').value);
+            const builder = document.getElementById('builder').value;
+
+            // Base costs
+            let baseCost = costRanges.websiteTypes[websiteType];
+            let designCost = costRanges.designTypes[designType];
+            
+            // Feature costs
+            let featureCost = [0, 0];
+            const features = ['contact', 'blog', 'booking', 'payment', 'login', 'multilingual', 'api', 'animations'];
+            const selectedFeatures = [];
+            
+            features.forEach(feature => {
+                if (document.getElementById(feature).checked) {
+                    selectedFeatures.push(feature);
+                    const cost = costRanges.features[feature];
+                    featureCost[0] += cost[0];
+                    featureCost[1] += cost[1];
+                }
+            });
+
+            // Pages cost (beyond 5 pages)
+            const extraPages = Math.max(0, pages - 5);
+            const pagesCost = [extraPages * 200, extraPages * 400];
+
+            // Subtotal before multiplier
+            const subtotal = [
+                baseCost[0] + designCost[0] + featureCost[0] + pagesCost[0],
+                baseCost[1] + designCost[1] + featureCost[1] + pagesCost[1]
+            ];
+
+            // Apply builder multiplier
+            const multiplier = costRanges.builders[builder];
+            const totalBuildCost = [
+                Math.round(subtotal[0] * multiplier),
+                Math.round(subtotal[1] * multiplier)
+            ];
+
+            // Ongoing costs
+            let annualCost = [10, 25]; // Domain
+            const ongoingServices = ['hosting', 'maintenance', 'seo'];
+            
+            ongoingServices.forEach(service => {
+                if (document.getElementById(service).checked) {
+                    const cost = costRanges.ongoing[service];
+                    annualCost[0] += cost[0];
+                    annualCost[1] += cost[1];
+                }
+            });
+
+            // Update display
+            updateDisplay({
+                buildCost: totalBuildCost,
+                annualCost: annualCost,
+                baseCost: baseCost,
+                designCost: designCost,
+                featureCost: featureCost,
+                pagesCost: pagesCost,
+                multiplier: multiplier,
+                websiteType: websiteType,
+                pages: pages,
+                selectedFeatures: selectedFeatures,
+                builder: builder
+            });
+        }
+
+        function updateDisplay(costs) {
+            document.getElementById('buildCost').textContent = `$${costs.buildCost[0].toLocaleString()} - $${costs.buildCost[1].toLocaleString()}`;
+            document.getElementById('annualCost').textContent = `$${costs.annualCost[0].toLocaleString()} - $${costs.annualCost[1].toLocaleString()}`;
+            
+            document.getElementById('baseCost').textContent = `$${costs.baseCost[0].toLocaleString()} - $${costs.baseCost[1].toLocaleString()}`;
+            document.getElementById('designCost').textContent = `$${costs.designCost[0].toLocaleString()} - $${costs.designCost[1].toLocaleString()}`;
+            document.getElementById('featuresCost').textContent = `$${costs.featureCost[0].toLocaleString()} - $${costs.featureCost[1].toLocaleString()}`;
+            document.getElementById('pagesCost').textContent = `$${costs.pagesCost[0].toLocaleString()} - $${costs.pagesCost[1].toLocaleString()}`;
+            document.getElementById('multiplier').textContent = `${costs.multiplier}x`;
+
+            // Generate summary
+            const websiteTypeNames = {
+                onepage: 'One-page',
+                small: 'Small Business',
+                ecommerce: 'E-commerce',
+                enterprise: 'Enterprise'
+            };
+
+            const builderNames = {
+                diy: 'DIY approach',
+                'freelancer-offshore': 'offshore freelancer',
+                'freelancer-local': 'local freelancer',
+                'small-agency': 'small agency',
+                'large-agency': 'large agency'
+            };
+
+            const summary = `Based on your selections (${websiteTypeNames[costs.websiteType]} website with ${costs.pages} pages, ${costs.selectedFeatures.length} additional features, built by a ${builderNames[costs.builder]}), you're likely to spend between $${costs.buildCost[0].toLocaleString()} and $${costs.buildCost[1].toLocaleString()} for initial development. Expect to budget around $${costs.annualCost[0].toLocaleString()} to $${costs.annualCost[1].toLocaleString()} per year for ongoing services.`;
+            
+            document.getElementById('summary').textContent = summary;
+        }
+
+        // Event listeners
+        document.getElementById('pages').addEventListener('input', function() {
+            document.getElementById('pagesDisplay').textContent = `${this.value} pages`;
+            calculateCosts();
+        });
+
+        // Add event listeners to all form elements
+        const formElements = document.querySelectorAll('select, input[type="checkbox"], input[type="range"]');
+        formElements.forEach(element => {
+            element.addEventListener('change', calculateCosts);
+        });
+
+        // Initial calculation
+        calculateCosts();
+    </script>
+</body>
+</html>
